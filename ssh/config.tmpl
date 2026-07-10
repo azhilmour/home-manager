@@ -1,0 +1,28 @@
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile {{ github_ssh_key }}
+    IdentitiesOnly yes
+
+Host remote-vm
+    HostName vm.example.com
+    User ubuntu
+    Port 22
+    IdentityFile {{ vm_ssh_key }}
+    IdentitiesOnly yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    ForwardAgent yes
+
+Host *
+    AddKeysToAgent yes
+    IdentitiesOnly yes
+    ControlMaster auto
+    ControlPath ~/.ssh/cm-%C
+    ControlPersist 10m
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    HashKnownHosts yes
+    StrictHostKeyChecking ask
+    ForwardAgent no
+    ForwardX11 no
