@@ -36,7 +36,7 @@ eval "$(oh-my-posh init zsh \
 alias ls='eza'
 alias ll='eza -la --git'
 alias cat='bat --paging=never'
-alias vi='vim'
+alias vi='vim -u DEFAULTS "+set mouse="'
 
 # One-command Home Manager rebuild (needs --impure; see the repo README).
 alias hms='home-manager switch --flake "$HOME/.config/home-manager#$USER" --impure'
