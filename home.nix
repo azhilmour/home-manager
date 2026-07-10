@@ -33,7 +33,7 @@
     tmuxPlugins.continuum     # periodic auto-save
 
     # editor
-    vim
+    vim-full
 
     # everyday CLI tools
     fzf
