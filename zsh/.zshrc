@@ -55,9 +55,6 @@ source "$HOME/.nix-profile/share/fzf-tab/fzf-tab.plugin.zsh"
 # sudo
 source "$HOME/.nix-profile/share/oh-my-zsh/plugins/sudo/sudo.plugin.zsh"
 
-# docker completions
-source "$HOME/.nix-profile/share/oh-my-zsh/plugins/docker/docker.plugin.zsh"
-
 # autosuggestions
 source "$HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
