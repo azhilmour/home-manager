@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -78,6 +78,25 @@
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
   ];
+
+  # ---------------------------------------------------------------------------
+  # ACTIVATION
+  #
+  # Shell snippets run by `home-manager switch` after the new generation's files
+  # are in place. Each entry is a DAG node ordered with lib.hm.dag helpers
+  # (entryAfter/entryBefore); "writeBoundary" is the point after which the new
+  # home files exist, so `entryAfter [ "writeBoundary" ]` is the usual anchor.
+  # Prefix commands with `run` so they're echoed under -v and skipped on a
+  # dry-run activation. Add further activation steps as new attrs below.
+  # ---------------------------------------------------------------------------
+  home.activation = {
+    # oh-my-posh's init cache bakes in the oh-my-posh binary's /nix/store path.
+    # A flake update + garbage-collect leaves it pointing at a deleted path,
+    # breaking the prompt. Wipe it so it regenerates against the current binary.
+    clearOhMyPoshCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run rm -rf "$HOME/.cache/oh-my-posh"
+    '';
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
